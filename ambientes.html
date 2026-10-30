@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Ambientes — CAUCE hogar (Preview)</title>
+<meta name="description" content="Visualizá las lámparas CAUCE hogar en distintos ambientes.">
+<meta name="theme-color" content="#1b1511">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="ambientes">
+<main>
+<section class="s dark" style="padding-top:calc(var(--top) + 100px)">
+  <div class="lab">Visualizador</div>
+  <h2 class="t">Probala en tu <em>ambiente</em></h2>
+  <p class="lead">Elegí un espacio, cambiá la intensidad y movela por la pared. Así se ve la luz antes de llevarla a casa.</p>
+  <div class="viz">
+    <div class="stagebox">
+      <svg id="vz" viewBox="0 0 800 500" role="img" aria-label="Simulación de lámpara en un ambiente"><g id="bg"></g><rect id="dark" width="800" height="500" fill="#07050a" opacity=".7"/><g id="lightL"></g><g id="lampG" tabindex="0" aria-label="Lámpara, arrastrar o usar flechas para mover"></g></svg>
+      <div class="cap" id="cap"></div><div class="hintv" id="vhint">Arrastrá la lámpara</div>
+    </div>
+    <div class="ctrl">
+      <div><h4>Ambiente</h4><div class="opts" id="oAmb"></div></div>
+      <div><h4>Modelo</h4><div class="opts" id="oMod"></div></div>
+      <div><h4>Intensidad</h4><div class="opts" id="oLvl"></div></div>
+      <div><h4>Temperatura de luz</h4><div class="opts" id="oTmp"></div></div>
+      <div><h4>Momento del día</h4><div class="opts" id="oMode"></div></div>
+      <div><h4 id="vzPrice" style="color:#f3ead9;letter-spacing:.14em"></h4><div class="cta-row" style="margin-top:8px"><button class="btn wa" id="vzAdd">Agregar al carrito</button><button class="btn line" id="vzSee">Ver ficha</button></div></div>
+    </div>
+  </div>
+  <p class="note" style="color:#8d7d66">Simulación ilustrativa: los ambientes y la luz son representaciones y pueden diferir de tu espacio real.</p>
+</section>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/art.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/visualizer.js"></script>
+</body>
+</html>

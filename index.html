@@ -1,52 +1,112 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="es-AR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAUCE Hogar | Iluminación Ambiental</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CAUCE hogar — Habitar más lento (Preview)</title>
+<meta name="description" content="Preview de diseño web para CAUCE hogar: lámparas de pared que transforman tu rincón. Propuesta de APS Developer.">
+<meta name="theme-color" content="#1b1511">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <header class="hero">
-        <h1>CAUCE Hogar</h1>
-        <p>Iluminación que transforma tu espacio en un hogar lleno de paz.</p>
-    </header>
+<body data-page="home">
+<main>
+<header class="hero" id="top">
+  <div class="fb" aria-hidden="true"></div>
+  <div class="in">
+    <div class="eyebrow">CAUCE hogar · Paraná</div>
+    <h1>Habitar más <em>lento.</em></h1>
+    <p>Lámparas de pared que transforman tu rincón. Luz cálida, materiales nobles y una atmósfera que te baja el ritmo.</p>
+    <div class="cta-row"><a class="btn fill" href="catalogo.html">Ver catálogo</a><a class="btn line" href="ambientes.html">Probar en tu ambiente</a></div>
+  </div>
+  <div class="vframe">
+    <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="assets/video/poster.jpg" aria-label="Video de las lámparas CAUCE hogar">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <button class="vctl" id="vctl" aria-label="Pausar video">❚❚</button>
+  <div class="scrollhint"><span>Scrolleá</span><i></i></div>
+</header>
 
-    <section class="about">
-        <h2>El Arte de la Luz</h2>
-        <p>Con <strong>CAUCE Hogar</strong> y la dedicación de <em>APS Developer</em>, creamos lámparas que equilibran estética y funcionalidad, promoviendo ambientes relajantes y armoniosos.</p>
-    </section>
+<div id="stage">
+  <div class="pin">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="step on" data-i="0"><div class="eyebrow">Una luz, tres momentos</div><h2>Mantené el botón y <em>elegí</em> la intensidad.</h2><p>Seguí bajando: así se ve una lámpara CAUCE cuando cambia el ritmo del día.</p></div>
+    <div class="step" data-i="1"><div class="eyebrow">Intensidad · Alta</div><h2>Para cuando la casa <em>despierta.</em></h2><p>Luz plena para leer, cocinar o trabajar.</p><div class="meter"><span></span><span></span><span></span><em style="font-style:normal;margin-left:6px">Alta</em></div></div>
+    <div class="step" data-i="2"><div class="eyebrow">Intensidad · Media</div><h2>Para <em>quedarse</em> un rato más.</h2><p>La luz de las charlas largas. Cálida, pareja, justa.</p><div class="meter"><span></span><span></span><span></span><em style="font-style:normal;margin-left:6px">Media</em></div></div>
+    <div class="step" data-i="3"><div class="eyebrow">Intensidad · Baja</div><h2>Para <em>soltar</em> el día.</h2><p>Apenas un resplandor. Control remoto incluido, para elegirla sin levantarte.</p><div class="meter"><span></span><span></span><span></span><em style="font-style:normal;margin-left:6px">Baja</em></div><div class="cta-row"><a class="btn fill" href="catalogo.html">Elegir mi lámpara</a></div></div>
+    <div class="progress" aria-hidden="true"><b class="on"></b><b></b><b></b><b></b></div>
+  </div>
+</div>
 
-    <section class="catalog">
-        <h2>Catálogo</h2>
-        <div class="products">
-            <!-- 3D product cards placeholders -->
-            <div class="product-card">
-                <img src="placeholder.png" alt="Lámpara Rustica 1" />
-                <h3>Lámpara Rustica 1</h3>
-                <p>Descripción breve.</p>
-            </div>
-            <div class="product-card">
-                <img src="placeholder.png" alt="Lámpara Rustica 2" />
-                <h3>Lámpara Rustica 2</h3>
-                <p>Descripción breve.</p>
-            </div>
-        </div>
-    </section>
+<div class="marq" aria-hidden="true"><div><span>·</span>Luz cálida<span>·</span>Texturas naturales<span>·</span>Paleta neutra<span>·</span>Envíos a todo el país<span>·</span>Habitar más lento<span>·</span>Luz cálida<span>·</span>Texturas naturales<span>·</span>Paleta neutra<span>·</span>Envíos a todo el país<span>·</span>Habitar más lento<span>·</span>Luz cálida<span>·</span>Texturas naturales<span>·</span>Paleta neutra<span>·</span>Envíos a todo el país<span>·</span>Habitar más lento<span>·</span>Luz cálida<span>·</span>Texturas naturales<span>·</span>Paleta neutra<span>·</span>Envíos a todo el país<span>·</span>Habitar más lento</div></div>
 
-    <section class="interactive">
-        <h2>Visualiza en tu entorno</h2>
-        <p>Selecciona una lámpara y elige el entorno para ver cómo ilumina tu hogar.</p>
-        <div class="viewer">
-            <div id="lampCube"><div class="front"></div><div class="back"></div><div class="right"></div><div class="left"></div><div class="top"></div><div class="bottom"></div></div>
-        </div>
-    </section>
+<section class="s alt" style="padding-top:50px;padding-bottom:50px">
+  <div class="benef">
+    <div class="rv"><b>Envío nacional</b>Despachamos desde Paraná a todo el país.</div>
+    <div class="rv" style="--d:.08s"><b>10% OFF</b>Pagando por transferencia.</div>
+    <div class="rv" style="--d:.16s"><b>3 cuotas</b>Sin interés con tarjeta.</div>
+    <div class="rv" style="--d:.24s"><b>10 días</b>Para arrepentirte de tu compra.</div>
+  </div>
+</section>
 
-    <footer>
-        <p>&copy; 2026 CAUCE Hogar. Todos los derechos reservados. Aviso de cookies y <a href="#" class="terms">términos legales</a>.</p>
-        <p>Producto de <strong>APS Developer</strong>.</p>
-    </footer>
+<section class="s" id="filosofia">
+  <div class="lab rv">Filosofía</div>
+  <p class="big" id="big">No iluminamos paredes. Cambiamos cómo se *siente* un espacio. Una luz tenue, un rincón elegido, y el día baja el ritmo.</p>
+  <div class="pillars">
+    <div class="pil rv"><div class="tex t1"></div><h3>Paleta neutra</h3><p>Hueso, arena y arcilla. Tonos que no gritan y dejan que la luz sea la protagonista.</p></div>
+    <div class="pil rv" style="--d:.12s"><div class="tex t2"></div><h3>Texturas naturales</h3><p>Madera, ladrillo, lino y cal. Superficies con memoria que la luz cálida vuelve a despertar.</p></div>
+    <div class="pil rv" style="--d:.24s"><div class="tex t3"></div><h3>Luz que abraza</h3><p>Tres intensidades pensadas para acompañar cada momento, de la tarea al descanso.</p></div>
+  </div>
+  <div class="palette rv" aria-label="Paleta cromática">
+    <div style="background:#ece5d8;color:#5e4f43">Hueso</div><div style="background:#d9ccb6;color:#5e4f43">Arena</div><div style="background:#a68b6c;color:#f4efe5">Arcilla</div><div style="background:#8a5a44;color:#f4efe5">Ladrillo</div><div style="background:#8b9378;color:#f4efe5">Salvia</div><div style="background:#3b2f26;color:#d9ccb6">Tierra</div><div style="background:#ffcf8a;color:#3b2f26">Luz</div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<section class="s alt" id="catalogo">
+  <div class="head2"><div><div class="lab rv">Catálogo</div><h2 class="t rv">Lámparas que <em>transforman</em> tu rincón</h2></div><a class="btn out rv" href="catalogo.html">Ver todo el catálogo</a></div>
+  <div class="grid" id="featured"></div>
+  <p class="note">Precios, packs y stock de ejemplo para esta preview. Se actualizan con los datos reales del negocio al publicar.</p>
+</section>
+
+<section class="s dark" id="cantidad">
+  <div class="lab rv">Llevá más, pagá menos</div>
+  <h2 class="t rv">Una lámpara por <em>rincón</em></h2>
+  <p class="lead rv">Sumá lámparas individuales y el descuento se aplica solo en el carrito. Ejemplo de la preview.</p>
+  <div class="tiers"><div class="tier rv"><b>1</b><span>lámpara · precio de lista</span></div><div class="tier rv" style="--d:.1s"><b>10%</b><span>llevando 2 lámparas individuales</span></div><div class="tier rv" style="--d:.2s"><b>15%</b><span>llevando 3 o más lámparas individuales</span></div></div>
+</section>
+
+<section class="s">
+  <div class="teaser rv">
+    <div class="tx"><div class="lab" style="color:var(--warm)">Visualizador</div><h2>Probala en tu <em>ambiente</em></h2><p>Elegí un espacio, cambiá la intensidad y movela por la pared antes de decidir.</p><div class="cta-row"><a class="btn fill" href="ambientes.html">Abrir el visualizador</a></div></div>
+    <div class="pv" id="tzv"></div>
+  </div>
+</section>
+
+<section class="s alt">
+  <div class="lab rv">Quiénes somos</div>
+  <h2 class="t rv">Somos dos. <em>Números</em> y atmósferas.</h2>
+  <p class="lead rv">Una arquitecta y un contador. Un día decidimos emprender juntos y hoy mandamos lámparas a todo el país.</p>
+  <div class="cta-row rv"><a class="btn dark" href="nosotros.html">Conocer la historia</a></div>
+</section>
+
+<section class="s ctc" id="contacto">
+  <div class="lab rv">Contacto</div><h2 class="t rv">Encendamos <em>tu rincón</em></h2>
+  <p class="rv">Contanos cómo es tu espacio y te ayudamos a elegir la luz justa.</p>
+  <div class="cta-row rv"><a class="btn wa" href="https://wa.me/5493435032402" target="_blank" rel="noopener">Escribinos por WhatsApp</a><a class="btn line" style="border-color:rgba(244,239,229,.5);color:var(--paper)" href="https://www.instagram.com/cauce.hogar" target="_blank" rel="noopener">@cauce.hogar</a></div>
+</section>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/art.js"></script>
+<script src="js/layout.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/home.js"></script>
 </body>
 </html>

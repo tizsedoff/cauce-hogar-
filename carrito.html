@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Carrito — CAUCE hogar (Preview)</title>
+<meta name="description" content="Tu carrito de CAUCE hogar.">
+<meta name="theme-color" content="#1b1511">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="carrito">
+<main>
+<div class="pagehead"><div class="crumb"><a href="index.html">Inicio</a><span>/</span>Carrito</div><h1 style="font-family:var(--serif);font-weight:300;font-size:clamp(40px,6vw,88px);line-height:1;color:var(--umber)">Tu <em style="color:var(--brick)">carrito</em></h1></div>
+<div id="emptyBox" class="s" style="display:none;text-align:center"><div class="empty">Tu carrito está vacío.<br>Elegí una luz.</div><div class="cta-row" style="justify-content:center"><a class="btn dark" href="catalogo.html">Ver catálogo</a></div></div>
+<div class="cartpg" id="wrap">
+  <div><div id="lines"></div><button class="rm" id="clear" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8a7966;text-decoration:underline;margin-top:18px">Vaciar carrito</button></div>
+  <aside class="sum">
+    <h2>Resumen</h2>
+    <div class="prog" id="prog"></div>
+    <div id="totals"></div>
+    <div class="lbl2" style="margin-top:20px">Cupón</div>
+    <div class="mini" style="margin-top:0"><input class="fld" id="cupIn" placeholder="Código (ej. BIENVENIDA)"><button class="btn out" id="cupBtn" style="width:auto;margin:0">Aplicar</button></div><div class="hint" id="cupMsg"></div>
+    <div class="lbl2">Envío</div>
+    <div class="mini" style="margin-top:0"><input class="fld" id="cpIn" inputmode="numeric" maxlength="8" placeholder="Código postal"><button class="btn out" id="cpBtn" style="width:auto;margin:0">Calcular</button></div><div class="hint" id="cpMsg"></div>
+    <div class="lbl2">Medio de pago</div>
+    <div class="pay">
+      <label><input type="radio" name="pay" value="transfer"><span>Transferencia<small>10% OFF (ejemplo)</small></span></label>
+      <label><input type="radio" name="pay" value="mp"><span>Mercado Pago<small>Link de pago que te enviamos por WhatsApp</small></span></label>
+      <label><input type="radio" name="pay" value="card"><span>Tarjeta en 3 cuotas<small>Sin interés (ejemplo)</small></span></label>
+    </div>
+    <div class="form"><input class="fld" id="fn" placeholder="Nombre y apellido"><input class="fld" id="ft" type="tel" placeholder="Teléfono (opcional)"><input class="fld" id="fc" placeholder="Ciudad y provincia"><textarea class="fld" id="fo" placeholder="Notas para tu pedido (opcional)"></textarea></div>
+    <button class="btn dark" id="send">Enviar pedido por WhatsApp</button>
+    <p class="hint">Preview: no se cobra nada online. Al enviar se abre WhatsApp con tu pedido armado y el negocio lo confirma con vos.</p>
+  </aside>
+</div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/art.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/cart-page.js"></script>
+</body>
+</html>
