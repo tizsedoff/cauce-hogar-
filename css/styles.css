@@ -81,9 +81,16 @@ body.menu .burger i:nth-child(2){top:20px;transform:rotate(-45deg)}
 @keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 
 /* 3D stage (corto) */
-#stage{position:relative;height:300vh;background:var(--dusk)}
+#stage{position:relative;height:260vh;background:var(--dusk)}
 .pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;color:#f3ead9}
-#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+.lroom{position:absolute;inset:0;overflow:hidden;background:var(--dusk)}
+.lcam{position:absolute;inset:-6%;will-change:transform;transform-origin:62% 38%}
+.lcam .ly{position:absolute;inset:0;opacity:0;transition:opacity 1.3s ease}
+.lcam .ly.on{opacity:1}
+.lcam .ly svg{position:absolute;inset:0;width:100%;height:100%}
+.lshade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(15,11,8,.88) 0%,rgba(15,11,8,.55) 38%,rgba(15,11,8,0) 72%),linear-gradient(0deg,rgba(15,11,8,.55),transparent 35%)}
+.lcam.breathe{animation:lbreathe 6s ease-in-out infinite}
+@keyframes lbreathe{50%{filter:brightness(1.07)}}
 .step{position:absolute;left:var(--gut);top:52%;width:min(520px,44vw);opacity:0;transform:translateY(calc(-50% + 26px));pointer-events:none;transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
 .step.on{opacity:1;transform:translateY(-50%);pointer-events:auto}
 .step h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5.6vw,82px);line-height:.95}
@@ -386,6 +393,7 @@ footer a:hover,footer button.lnk:hover{color:var(--warm)}
   .step{width:auto;right:var(--gut);top:auto;bottom:11vh;transform:translateY(26px)}
   .step.on{transform:none}
   .progress{display:none}
+  .lshade{background:linear-gradient(0deg,rgba(15,11,8,.9) 0%,rgba(15,11,8,.5) 45%,rgba(15,11,8,.1) 100%)}
   .sum{position:static}
   #pv{font-size:9.5px;letter-spacing:.1em}#pv .hide{display:none}
   #ann{font-size:10px;letter-spacing:.08em}
