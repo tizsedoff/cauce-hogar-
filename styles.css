@@ -1,0 +1,81 @@
+/*
+ * Minimalista, rústico y elegante.
+ * Palette neutra: fondo #fafafa, texto #333333.
+ * Texturas naturales: madera y piedra.
+ */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fafafa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.hero {
+    background: #e5e5e5 url('wood-texture.jpg') center/cover;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #fff;
+}
+.hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: 3rem;
+}
+.hero p {
+    font-size: 1.2rem;
+}
+
+section {
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about h2, .catalog h2, .interactive h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+.product-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 200px;
+    text-align: center;
+    padding: 1rem;
+}
+.product-card img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+.viewer { text-align: center; }
+#lampCanvas { width: 100%; max-width: 600px; height: 400px; background: #e5e5e5; border: 1px solid #ddd; }
+
+footer { background: #333; color: #fafafa; text-align: center; padding: 1rem; }
+footer a { color: #ffb700; text-decoration: underline; }
+
+/* Cookie banner */
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.8);
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+#cookie-banner button { background: #ffb700; border: none; padding: 0.5rem 1rem; cursor: pointer; }
