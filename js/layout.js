@@ -6,11 +6,21 @@
   if (page !== 'home') document.body.classList.add('solid');
 
   const NAV = [['index.html', 'Inicio', 'home'], ['catalogo.html', 'Catálogo', 'catalogo'], ['ambientes.html', 'Ambientes', 'ambientes'], ['envios.html', 'Envíos y pagos', 'envios'], ['nosotros.html', 'Nosotros', 'nosotros'], ['contacto.html', 'Contacto', 'contacto']];
-  const ANN = ['Envíos a todo el país desde Paraná', C.CFG.transferOff + '% OFF por transferencia', C.CFG.cuotas + ' cuotas sin interés', 'Promo de octubre · Pack x2 a $ 59.500'];
+  const ANN = [
+    C.CFG.cuotas + ' cuotas sin interés',
+    C.CFG.transferOff + '% OFF por transferencia',
+    'Envíos a todo el país desde Paraná',
+    'Envío gratis desde ' + C.money(C.CFG.freeFrom),
+    'Retiro gratis en Paraná',
+    'Pack x2 desde $ 59.500 · Promo de octubre',
+    'Pagá con Mercado Pago',
+    '10 días para arrepentirte'
+  ];
+  const annHalf = ANN.concat(ANN).map(t => '<span>' + t + '</span>').join('');
 
   const header = `
   <div id="pv" role="note"><span class="dot"></span><span><b>Versión preview</b> · Propuesta de diseño, no es el sitio oficial de CAUCE hogar</span><span class="hide">· by APS Developer</span></div>
-  <div id="ann" aria-live="off">${ANN.map((t, i) => `<span class="${i ? '' : 'on'}">${t}</span>`).join('')}</div>
+  <div id="ann" role="marquee" aria-label="Cuotas, envíos y promociones"><div class="annT"><div class="annH">${annHalf}</div><div class="annH" aria-hidden="true">${annHalf}</div></div></div>
   <nav class="top">
     <a class="logo" href="index.html" aria-label="CAUCE hogar, inicio">CAUCE<small>HOGAR</small></a>
     <ul class="links">${NAV.map(n => `<li><a href="${n[0]}" class="${n[2] === page ? 'act' : ''}">${n[1]}</a></li>`).join('')}</ul>
@@ -51,9 +61,6 @@
   document.body.insertAdjacentHTML('afterbegin', header);
   document.body.insertAdjacentHTML('beforeend', footer);
 
-  /* anuncios rotativos */
-  const anns = $$('#ann span'); let ai = 0;
-  setInterval(() => { anns[ai].classList.remove('on'); ai = (ai + 1) % anns.length; anns[ai].classList.add('on'); }, 3800);
 
   /* menú móvil */
   $('#burger').onclick = () => document.body.classList.toggle('menu');
