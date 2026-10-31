@@ -10,7 +10,21 @@
     const noVideo = () => hero.classList.add('no-video');
     const ok = () => hero.classList.remove('no-video');
     const icon = () => { const p = v.paused; btn.textContent = p ? '\u25B6' : '\u275A\u275A'; btn.setAttribute('aria-label', p ? 'Reproducir video' : 'Pausar video'); };
-    const play = () => { if (userPaused || reduce) return; v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    const snd = $('#vsnd');
+    let soundOn = false;
+    const sndUi = () => { const on = !v.muted && soundOn; snd.setAttribute('aria-pressed', on); snd.setAttribute('aria-label', on ? 'Silenciar video' : 'Activar sonido'); snd.querySelector('.ic').textContent = on ? '\uD83D\uDD0A' : '\uD83D\uDD07'; snd.querySelector('.tx').textContent = on ? 'Sonido activado' : 'Activar sonido'; };
+    const play = () => {
+      if (userPaused || reduce) return;
+      if (!soundOn) v.muted = true;
+      const p = v.play();
+      if (p && p.catch) p.catch(() => { if (soundOn) { soundOn = false; v.muted = true; sndUi(); const q = v.play(); if (q && q.catch) q.catch(() => {}); } });
+    };
+    snd.onclick = () => {
+      snd.classList.remove('attn');
+      soundOn = !soundOn; v.muted = !soundOn; if (soundOn) { v.volume = 1; userPaused = false; if (v.paused) play(); }
+      sndUi();
+    };
+    v.addEventListener('volumechange', sndUi);
 
     v.muted = true; v.defaultMuted = true; v.playsInline = true; v.loop = true;
     v.addEventListener('loadeddata', () => { ok(); play(); });
