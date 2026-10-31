@@ -54,6 +54,10 @@
     addEventListener('scroll', rv, { passive: true }); rv();
   }
 
+  /* cómo funciona */
+  const hg = $('#howGrid');
+  if (hg) hg.innerHTML = C.HOW.map((h, i) => `<figure class="hw rv" style="--d:${i * .08}s"><img src="${h.img}" alt="${h.t}" loading="lazy" decoding="async"><figcaption><b><i>0${i + 1}</i>${h.t}</b>${h.d}</figcaption></figure>`).join('');
+
   /* destacados */
   const feat = $('#featured');
   if (feat) { feat.innerHTML = C.PRODUCTS.map(C.card).join(''); C.ui.reveal(); }

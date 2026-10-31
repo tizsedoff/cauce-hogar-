@@ -25,14 +25,19 @@
     <div id="totals"></div>
     <div class="lbl2" style="margin-top:20px">Cupón</div>
     <div class="mini" style="margin-top:0"><input class="fld" id="cupIn" placeholder="Código (ej. BIENVENIDA)"><button class="btn out" id="cupBtn" style="width:auto;margin:0">Aplicar</button></div><div class="hint" id="cupMsg"></div>
-    <div class="lbl2">Envío</div>
-    <div class="mini" style="margin-top:0"><input class="fld" id="cpIn" inputmode="numeric" maxlength="8" placeholder="Código postal"><button class="btn out" id="cpBtn" style="width:auto;margin:0">Calcular</button></div><div class="hint" id="cpMsg"></div>
+    <div class="lbl2">Entrega</div>
+    <div class="pay">
+      <label><input type="radio" name="ship" value="home"><span>Envío a domicilio<small>A todo el país · gratis desde $ 100.000 (ejemplo)</small></span></label>
+      <label><input type="radio" name="ship" value="pickup"><span>Retiro en Paraná<small>Sin costo · punto y horario a coordinar por WhatsApp</small></span></label>
+    </div>
+    <div id="cpBox"><div class="mini" style="margin-top:0"><input class="fld" id="cpIn" inputmode="numeric" maxlength="8" placeholder="Código postal"><button class="btn out" id="cpBtn" style="width:auto;margin:0">Calcular</button></div><div class="hint" id="cpMsg"></div></div>
     <div class="lbl2">Medio de pago</div>
     <div class="pay">
       <label><input type="radio" name="pay" value="transfer"><span>Transferencia<small>10% OFF (ejemplo)</small></span></label>
       <label><input type="radio" name="pay" value="mp"><span>Mercado Pago<small>Link de pago que te enviamos por WhatsApp</small></span></label>
       <label><input type="radio" name="pay" value="card"><span>Tarjeta en 3 cuotas<small>Sin interés (ejemplo)</small></span></label>
     </div>
+    <div class="hint" id="payinfo" style="margin:-4px 0 6px"></div>
     <div class="form"><input class="fld" id="fn" placeholder="Nombre y apellido"><input class="fld" id="ft" type="tel" placeholder="Teléfono (opcional)"><input class="fld" id="fc" placeholder="Ciudad y provincia"><textarea class="fld" id="fo" placeholder="Notas para tu pedido (opcional)"></textarea></div>
     <button class="btn dark" id="send">Enviar pedido por WhatsApp</button>
     <p class="hint">Preview: no se cobra nada online. Al enviar se abre WhatsApp con tu pedido armado y el negocio lo confirma con vos.</p>

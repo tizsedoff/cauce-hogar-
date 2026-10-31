@@ -44,7 +44,7 @@
     white: { name: 'Blanca', head: '#f3eee4', plate: '#e4ddcf', stroke: '#b8ad99', pid: 'bla' }
   };
   const LEVELS = [{ n: 'Baja', i: .35 }, { n: 'Media', i: .65 }, { n: 'Alta', i: 1 }];
-  const TEMPS = { warm: { n: 'Cálida', c: '#ffb259' }, soft: { n: 'Ámbar suave', c: '#ffd08a' }, neutral: { n: 'Neutra', c: '#ffe9c8' } };
+  const TEMPS = { warm: { n: 'Cálida', c: '#ffb259' }, neutral: { n: 'Neutra', c: '#fff0d6' }, cold: { n: 'Fría', c: '#cfe3ff' } };
   const MODES = { day: { n: 'Día', dark: .04, col: '#2a2018', k: .3 }, dusk: { n: 'Atardecer', dark: .42, col: '#2b1708', k: .85 }, night: { n: 'Noche', dark: .76, col: '#07050a', k: 1 } };
 
   function lightMarkup(V, u){
@@ -126,6 +126,7 @@
   }
 
   function gallery(p, u){
+    if (p.photos) return p.photos.map(ph => ({ label: ph.label, svg: '<img src="' + ph.src + '" alt="' + p.name + ' — ' + ph.label + '" decoding="async">' }));
     return [
       { label: 'Producto', svg: lampSVG(p.color, p.n, u + 'a') },
       { label: 'En el living', svg: roomSVG({ amb: 'living', mod: p.color, lvl: 1, tmp: 'warm', mode: 'dusk', x: 330, y: 165 }, u + 'b') },
@@ -134,5 +135,6 @@
     ];
   }
 
+  C.cover = (p, u) => p.photos ? '<img src="' + p.photos[0].src + '" alt="' + p.name + '" loading="lazy" decoding="async">' : lampSVG(p.color, p.n, u);
   C.art = { SCENES, MODELS, LEVELS, TEMPS, MODES, lightMarkup, lampMarkup, roomSVG, lampSVG, intensitiesSVG, remoteSVG, gallery };
 })();

@@ -1,13 +1,13 @@
 /* Carrito: estado, persistencia (localStorage) y totales */
 (function(){
   const C = window.CAUCE, KEY = 'cauce_cart_v1';
-  const st = { items: {}, coupon: '', cp: '', pay: 'transfer' };
+  const st = { items: {}, coupon: '', cp: '', pay: 'transfer', ship: 'home' };
   const subs = [];
 
   function load(){
     try {
       const j = JSON.parse(localStorage.getItem(KEY) || '{}');
-      st.items = j.items || {}; st.coupon = j.coupon || ''; st.cp = j.cp || ''; st.pay = j.pay || 'transfer';
+      st.items = j.items || {}; st.coupon = j.coupon || ''; st.cp = j.cp || ''; st.pay = j.pay || 'transfer'; st.ship = j.ship || 'home';
       Object.keys(st.items).forEach(k => { if (!C.byId(k) || !(st.items[k] > 0)) delete st.items[k]; });
     } catch (e) {}
   }
@@ -18,14 +18,12 @@
   load();
   addEventListener('storage', e => { if (e.key === KEY) { load(); subs.forEach(f => f()); } });
 
+  const PAY = { transfer: 'Transferencia', mp: 'Mercado Pago', card: 'Tarjeta en ' + C.CFG.cuotas + ' cuotas' };
   const S = C.store = {
-    st,
+    st, PAY,
     subscribe(f){ subs.push(f); },
     count(){ return Object.values(st.items).reduce((a, b) => a + b, 0); },
-    add(id, q){
-      const p = C.byId(id); if (!p) return;
-      st.items[id] = Math.min(p.stock, (st.items[id] || 0) + (q || 1)); save();
-    },
+    add(id, q){ const p = C.byId(id); if (!p) return; st.items[id] = Math.min(p.stock, (st.items[id] || 0) + (q || 1)); save(); },
     setQty(id, q){
       const p = C.byId(id); if (!p) return;
       q = Math.max(0, Math.min(p.stock, Math.floor(q) || 0));
@@ -41,27 +39,25 @@
     },
     setCp(cp){ st.cp = cp; save(); },
     setPay(p){ st.pay = p; save(); },
+    setShip(m){ st.ship = m; save(); },
     totals(){
-      const lines = Object.keys(st.items).map(id => {
-        const p = C.byId(id), q = st.items[id];
-        return { p, q, sub: p.price * q };
-      });
+      const lines = Object.keys(st.items).map(id => { const p = C.byId(id), q = st.items[id]; return { p, q, sub: p.price * q }; });
       const sub = lines.reduce((a, l) => a + l.sub, 0);
-      const indivUnits = lines.filter(l => l.p.cat === 'individual').reduce((a, l) => a + l.q, 0);
-      const indivSub = lines.filter(l => l.p.cat === 'individual').reduce((a, l) => a + l.sub, 0);
-      let volPct = 0;
-      C.CFG.volume.forEach(v => { if (indivUnits >= v.q) volPct = v.off; });
+      const indiv = lines.filter(l => l.p.cat === 'individual');
+      const indivUnits = indiv.reduce((a, l) => a + l.q, 0), indivSub = indiv.reduce((a, l) => a + l.sub, 0);
+      let volPct = 0; C.CFG.volume.forEach(v => { if (indivUnits >= v.q) volPct = v.off; });
       const volDisc = indivSub * volPct / 100;
       const cpPct = st.coupon ? (C.CFG.coupons[st.coupon] || 0) : 0;
       const cpDisc = (sub - volDisc) * cpPct / 100;
       const base = sub - volDisc - cpDisc;
-      const est = C.shipEstimate(st.cp);
+      const pickup = st.ship === 'pickup';
+      const est = pickup ? null : C.shipEstimate(st.cp);
       const free = base >= C.CFG.freeFrom && base > 0;
-      const ship = est ? (free ? 0 : est.cost) : null;
+      const ship = pickup ? 0 : (est ? (free ? 0 : est.cost) : null);
       const trDisc = st.pay === 'transfer' ? base * C.CFG.transferOff / 100 : 0;
       const total = base - trDisc + (ship || 0);
       const cuota = (base + (ship || 0)) / C.CFG.cuotas;
-      return { lines, sub, volPct, volDisc, cpPct, cpDisc, base, est, free, ship, trDisc, total, cuota,
+      return { lines, sub, volPct, volDisc, cpPct, cpDisc, base, pickup, est, free, ship, trDisc, total, cuota,
         missing: Math.max(0, C.CFG.freeFrom - base), progress: Math.min(100, base / C.CFG.freeFrom * 100) };
     },
     waMessage(extra){
@@ -71,9 +67,10 @@
       if (t.volDisc) m += 'Descuento por cantidad (' + t.volPct + '%): -' + C.money(t.volDisc) + '\n';
       if (t.cpDisc) m += 'Cupón ' + st.coupon + ': -' + C.money(t.cpDisc) + '\n';
       if (t.trDisc) m += 'Transferencia (-' + C.CFG.transferOff + '%): -' + C.money(t.trDisc) + '\n';
-      if (t.est) m += 'Envío a CP ' + st.cp + ' (' + t.est.zone + '): ' + (t.ship === 0 ? 'gratis' : C.money(t.ship)) + ' (estimado)\n';
+      if (t.pickup) m += 'Entrega: retiro en Paraná (a coordinar)\n';
+      else if (t.est) m += 'Envío a CP ' + st.cp + ' (' + t.est.zone + '): ' + (t.ship === 0 ? 'gratis' : C.money(t.ship)) + ' (estimado)\n';
       m += 'Total estimado: ' + C.money(t.total) + '\n';
-      m += 'Medio de pago: ' + ({ transfer: 'Transferencia', mp: 'Mercado Pago', card: 'Tarjeta en ' + C.CFG.cuotas + ' cuotas' }[st.pay] || st.pay) + '\n';
+      m += 'Medio de pago: ' + (PAY[st.pay] || st.pay) + '\n';
       if (extra) m += extra;
       return m;
     }

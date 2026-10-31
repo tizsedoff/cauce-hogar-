@@ -5,7 +5,7 @@
   const ui = C.ui = {};
   if (page !== 'home') document.body.classList.add('solid');
 
-  const NAV = [['index.html', 'Inicio', 'home'], ['catalogo.html', 'Catálogo', 'catalogo'], ['ambientes.html', 'Ambientes', 'ambientes'], ['nosotros.html', 'Nosotros', 'nosotros'], ['nosotros.html#envios', 'Envíos', ''], ['nosotros.html#contacto', 'Contacto', '']];
+  const NAV = [['index.html', 'Inicio', 'home'], ['catalogo.html', 'Catálogo', 'catalogo'], ['ambientes.html', 'Ambientes', 'ambientes'], ['envios.html', 'Envíos y pagos', 'envios'], ['nosotros.html', 'Nosotros', 'nosotros'], ['contacto.html', 'Contacto', 'contacto']];
   const ANN = ['Envíos a todo el país desde Paraná', C.CFG.transferOff + '% OFF por transferencia', C.CFG.cuotas + ' cuotas sin interés', 'Promo de octubre · Pack x2 a $ 59.500'];
 
   const header = `
@@ -21,9 +21,10 @@
   <footer class="ft"><div class="fg">
     <div><a class="logo" href="index.html">CAUCE<small>HOGAR</small></a>
       <p style="margin-top:20px;font-size:14px;max-width:290px">Lámparas que transforman tu rincón y te ayudan a habitar más lento.<br>${C.CFG.city} · Envíos a todo el país.</p>
-      <div class="pays"><span>Transferencia</span><span>Mercado Pago</span><span>Tarjetas</span></div></div>
+      <div class="pays"><span>Transferencia</span><span>Mercado Pago</span><span>Tarjetas</span></div>
+      <form class="news" id="newsForm" novalidate><label for="newsIn">Enterate de las novedades</label><div><input class="fld" id="newsIn" type="email" placeholder="Tu email" autocomplete="email"><button class="btn fill" type="submit">Suscribirme</button></div><small>Preview: el email no se envía a ningún servidor.</small></form></div>
     <div><h5>Tienda</h5><ul><li><a href="catalogo.html">Catálogo</a></li><li><a href="catalogo.html?cat=pack">Packs</a></li><li><a href="ambientes.html">Probar en tu ambiente</a></li><li><a href="carrito.html">Carrito</a></li></ul></div>
-    <div><h5>Información</h5><ul><li><a href="nosotros.html">Nosotros</a></li><li><a href="nosotros.html#envios">Envíos y preguntas</a></li><li><a href="legal.html#terminos">Términos y condiciones</a></li><li><a href="legal.html#privacidad">Política de privacidad</a></li><li><a href="legal.html#cookies">Política de cookies</a></li><li><a href="legal.html#devoluciones">Devoluciones y arrepentimiento</a></li><li><button class="lnk" id="ckReopen">Preferencias de cookies</button></li></ul></div>
+    <div><h5>Información</h5><ul><li><a href="nosotros.html">Nosotros</a></li><li><a href="envios.html">Envíos y medios de pago</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="legal.html#terminos">Términos y condiciones</a></li><li><a href="legal.html#privacidad">Política de privacidad</a></li><li><a href="legal.html#cookies">Política de cookies</a></li><li><a href="legal.html#devoluciones">Devoluciones y arrepentimiento</a></li><li><button class="lnk" id="ckReopen">Preferencias de cookies</button></li></ul></div>
     <div class="seal"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs>
       <g class="ring"><text font-size="9.4" letter-spacing="2.2" fill="currentColor" font-family="Jost,sans-serif"><textPath href="#circ" textLength="278" lengthAdjust="spacing">APS DEVELOPER · DISEÑO WEB · ESTUDIO DIGITAL ·</textPath></text></g>
       <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width=".8"/><circle cx="60" cy="60" r="31" fill="none" stroke="currentColor" stroke-width=".8"/>
@@ -69,7 +70,7 @@
   C.card = function(p){
     const off = C.offPct(p), href = 'producto.html?id=' + p.id;
     return `<article class="card rv">
-      <a class="pic" href="${href}" aria-label="Ver ${p.name}">${p.tag ? `<span class="tag${p.tag === 'Promo' ? ' promo' : ''}">${p.tag}</span>` : ''}${p.stock <= 5 ? `<span class="tag stock">Quedan ${p.stock}</span>` : ''}${C.art.lampSVG(p.color, p.n, 'c' + p.id)}</a>
+      <a class="pic" href="${href}" aria-label="Ver ${p.name}">${p.tag ? `<span class="tag${p.tag === 'Promo' ? ' promo' : ''}">${p.tag}</span>` : ''}${p.stock <= 5 ? `<span class="tag stock">Quedan ${p.stock}</span>` : ''}${C.cover(p, 'c' + p.id)}</a>
       <div class="info"><h3><a href="${href}">${p.name}</a></h3><div class="sub">${p.short}</div>
         <div class="price"><b>${C.money(p.price)}</b>${p.old ? `<s>${C.money(p.old)}</s><span class="off">${off}% OFF</span>` : ''}</div>
         <div class="pnote"><b>${C.money(C.transferPrice(p))}</b> con transferencia · ${C.CFG.cuotas} cuotas de ${C.money(p.price / C.CFG.cuotas)}</div>
@@ -95,7 +96,7 @@
       $('#dFoot').innerHTML = '<a class="btn dark" href="catalogo.html">Ver catálogo</a>';
       return;
     }
-    $('#dList').innerHTML = t.lines.map(l => `<div class="di"><a class="im" href="producto.html?id=${l.p.id}">${C.art.lampSVG(l.p.color, l.p.n, 'd' + l.p.id)}</a>
+    $('#dList').innerHTML = t.lines.map(l => `<div class="di"><a class="im" href="producto.html?id=${l.p.id}">${C.cover(l.p, 'd' + l.p.id)}</a>
       <div><b>${l.p.name}</b><small>${C.money(l.p.price)} c/u</small><div class="q"><button data-q="${l.p.id}" data-d="-1" aria-label="Quitar uno">−</button>${l.q}<button data-q="${l.p.id}" data-d="1" aria-label="Agregar uno">+</button></div></div>
       <div class="lt">${C.money(l.sub)}</div></div>`).join('');
     $('#dFoot').innerHTML = `<div class="prog" style="margin:0 0 14px">${t.free ? '¡Tenés <b>envío gratis</b>!' : 'Te faltan <b>' + C.money(t.missing) + '</b> para el envío gratis'}<i><b style="width:${t.progress}%"></b></i></div>
@@ -117,6 +118,15 @@
   $('#ckCfg').onclick = function(){ const c = $('#ckc'); if (c.classList.contains('on')) saveCk($('#ckA').checked, $('#ckM').checked); else { c.classList.add('on'); this.textContent = 'Guardar selección'; this.classList.add('pri'); } };
   $('#ckReopen').onclick = () => ck.classList.add('on');
   if (!get()) setTimeout(() => ck.classList.add('on'), 1400);
+
+  /* newsletter (preview: solo valida y guarda localmente) */
+  const nf = $('#newsForm');
+  if (nf) nf.addEventListener('submit', e => {
+    e.preventDefault(); const v = $('#newsIn').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) { ui.toast('Ingresá un email válido'); $('#newsIn').focus(); return; }
+    try { localStorage.setItem('cauce_news', v); } catch (err) {}
+    $('#newsIn').value = ''; ui.toast('¡Gracias! Te sumamos a la lista (preview)');
+  });
 
   ui.reveal();
   addEventListener('load', ui.reveal);
