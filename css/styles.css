@@ -508,3 +508,11 @@ table.zones td:first-child{font-family:var(--serif);font-size:20px;color:var(--u
 .hero.no-video .vsnd{display:none}
 @media (max-width:980px){.vsnd{right:74px;bottom:90px}}
 @media (max-width:420px){.vsnd .tx{display:none}.vsnd{padding:0 14px}}
+
+/* controles del hero: fuera de la zona de subtítulos del video */
+.vctl{right:var(--gut);bottom:14px}
+.vsnd{right:calc(var(--gut) + 56px);bottom:14px}
+@media (max-width:980px){
+  .vctl{right:20px;bottom:auto;top:calc(var(--top) + 78px)}
+  .vsnd{right:74px;bottom:auto;top:calc(var(--top) + 78px)}
+}
